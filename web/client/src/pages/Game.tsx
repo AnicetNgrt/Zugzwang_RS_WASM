@@ -1,5 +1,4 @@
-import React from 'react'
-import Page from '../components/Page'
+import React, { useEffect } from 'react'
 
 type Props = {
    zzg?: any
@@ -7,19 +6,22 @@ type Props = {
 
 export default function Game(props: Props) {
    return (
-      <Page>
+      <>
          <div className="
             absolute
             h-full w-full 
             flex items-center justify-center
-            bg-white
          ">
             { props.zzg ? (
-               <h1>Wasm loaded</h1>
+               <h2 className='text-green-600'>
+                  WASM INCLUDED
+               </h2>
             ) : (
-               <h1>Wasm not loaded</h1>
+               <h1 className='text-red-600'>
+                  NO WASM
+               </h1>
             ) }
          </div>
-      </Page>
+      </>
    )
 }
