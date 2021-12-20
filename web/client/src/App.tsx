@@ -4,18 +4,14 @@ import { Helmet } from 'react-helmet'
 import './styles/index.css'
 import favicon from '../public/favicon.png'
 
-import Home from './pages/Home'
-import About from './pages/About'
-import Posts from './pages/Posts'
+import GamePage from './pages/Game'
 import NotFound from './pages/404'
 
 type AppProps = {
-   greet?: (name: string) => void
+   zzg?: any
 }
 
-export default function App(props: AppProps): JSX.Element {
-   if (props.greet) props.greet("Anicet")
-   
+export default function App(props: AppProps): JSX.Element {   
    return (
       <>
          <Helmet>
@@ -24,9 +20,7 @@ export default function App(props: AppProps): JSX.Element {
             <link rel='icon' type='image/png' href={favicon} />
          </Helmet>
          <Switch>
-            <Route exact path='/' component={Home} />
-            <Route path='/about' component={About} />
-            <Route path='/posts' component={Posts} />
+            <Route exact path='/' render={() => <GamePage zzg={props.zzg}/>} />
             <Route path='*' component={NotFound} />
          </Switch>
       </>

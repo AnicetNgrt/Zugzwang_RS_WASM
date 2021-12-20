@@ -4,7 +4,7 @@ pub struct GameState {
     pub rules: Rules,
     pub board: Board,
     pub pawns: Vec<Pawn>,
-    pub schedule: HashMap<i32, Turn>,
+    pub schedule: Rc<HashMap<i32, Turn>>,
     pub turn: i32
 }
 
@@ -17,18 +17,18 @@ impl GameState {
             rules,
             board: Board::new(width, height),
             pawns: vec![],
-            schedule,
+            schedule: Rc::new(schedule),
             turn: 0
         }
     }
 
     fn create_first_turn(rules: &Rules) -> Turn {
-        let mut setup = Vec::<Rc<dyn Event>>::new();
+        let mut setup = Vec::<Box<dyn Event>>::new();
         for _ in 0..rules.max_pawn_per_player {
-            setup.push(Rc::new(EventSpawnPawn {
+            setup.push(Box::new(EventSpawnPawn {
                 owner: Entity::Player1
             }));
-            setup.push(Rc::new(EventSpawnPawn {
+            setup.push(Box::new(EventSpawnPawn {
                 owner: Entity::Player2
             }));
         }
@@ -54,7 +54,7 @@ impl Game {
         }
     }
 
-    fn apply_event(&mut self, event: &Rc<dyn Event>) -> Vec<Box<Rollback>> {
+    fn apply_event(&mut self, event: &Box<dyn Event>) -> Vec<Box<Rollback>> {
         let mut rollbacks: Vec<Box<Rollback>> = vec![];
 
         if event.as_ref().is_allowed(&self.state) == false {
@@ -93,11 +93,10 @@ pub struct Rules {
     pub max_pawn_per_player: usize
 }
 
-#[derive(Clone)]
 pub struct Turn {
-    pub setup: Vec<Rc<dyn Event>>,
-    pub playtime: Vec<Rc<dyn Event>>,
-    pub after: Vec<Rc<dyn Event>>,
+    pub setup: Vec<Box<dyn Event>>,
+    pub playtime: Vec<Box<dyn Event>>,
+    pub after: Vec<Box<dyn Event>>,
 }
 
 pub trait Event {
