@@ -2,7 +2,7 @@ import React from 'react'
 import { render, hydrate } from 'react-dom'
 import App from './App'
 import { BrowserRouter } from 'react-router-dom'
-import { greet } from 'zzg'
+import { greet } from './zzg/zzg_wasm'
 
 const props = (() => {
    const stateHolder = window as { __INITIAL_PROPS__?: string }
