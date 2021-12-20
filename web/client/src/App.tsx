@@ -3,13 +3,11 @@ import { Helmet } from 'react-helmet'
 
 import './styles/index.css'
 import favicon from '../public/favicon.png'
-import { greet } from 'zzg'
 
 import Home from './pages/Home'
 import About from './pages/About'
 import Posts from './pages/Posts'
 import NotFound from './pages/404'
-import Counter from './components/Counter'
 
 type AppProps = {
    greet?: (name: string) => void
@@ -22,7 +20,7 @@ export default function App(props: AppProps): JSX.Element {
       <>
          <Helmet>
             <meta charSet='utf-8' />
-            <title>Reactix</title>
+            <title>Zugzwang</title>
             <link rel='icon' type='image/png' href={favicon} />
          </Helmet>
          <Switch>
