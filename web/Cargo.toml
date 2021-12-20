@@ -1,0 +1,22 @@
+[package]
+name = "web"
+version = "0.1.0"
+authors = ["V. Ageno <valerioageno@yahoo.it>", "Anicet Nougaret"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+path = "src/main.rs"
+name = "web"
+
+[dependencies]
+actix-files = "0.5.0"
+actix-rt = "2.2.0"
+actix-service = "2.0.2"
+actix-web = "3.3.3"
+futures = "0.3.14"
+ssr_rs = "0.2.3"
